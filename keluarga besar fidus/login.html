@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Fidus Family</title>
+    
+    <!--box icons-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!--google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!--custom css-->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(218, 2, 14, 0.9) 0%, rgba(78, 205, 196, 0.9) 100%);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .login-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 3rem;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            border: 2px solid rgba(218, 2, 14, 0.3);
+            animation: slideIn 0.8s ease forwards;
+        }
+        
+        .login-header {
+            margin-bottom: 2.5rem;
+        }
+        
+        .login-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .login-header p {
+            font-size: 1.6rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .family-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2rem;
+            color: white;
+            font-weight: 700;
+            animation: pulse 2s ease-in-out infinite;
+            overflow: hidden;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(218, 2, 14, 0.5);
+        }
+        
+        .family-logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .family-logo:hover .family-logo-img {
+            transform: scale(1.1);
+        }
+        
+        .form-group {
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 1.4rem;
+            color: var(--dark-color);
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 1.2rem;
+            border: 2px solid rgba(218, 2, 14, 0.2);
+            border-radius: 10px;
+            font-size: 1.6rem;
+            background: rgba(255, 255, 255, 0.95);
+            color: #000;
+            transition: var(--transition);
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        
+        .form-group input::placeholder {
+            color: #666;
+            opacity: 1;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 15px rgba(218, 2, 14, 0.2);
+            color: #000;
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            font-size: 1.4rem;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+        }
+        
+        .forgot-password {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .forgot-password:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 25px rgba(218, 2, 14, 0.3);
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(218, 2, 14, 0.4);
+        }
+        
+        .back-to-home {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .back-to-home a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .back-to-home a:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+        
+        .error-message {
+            background: rgba(255, 107, 107, 0.9);
+            color: #d63031;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            display: none;
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 1rem;
+            }
+            
+            .login-box {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .login-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <div class="family-logo">
+                    <img src="unnamed.jpg" alt="Fidus Family Logo" class="family-logo-img">
+                </div>
+                <h2>Welcome Back</h2>
+                <p>Login to access Fidus Family memories</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="error-message" id="errorMessage">
+                    Invalid username or password. Please try again.
+                </div>
+                
+                <div class="form-group">
+                    <label for="username">Username or Email</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username or email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <i class='bx bx-lock-open-alt'></i> Kas Masuk Pukar
+                </button>
+            </form>
+            
+            <div class="back-to-home">
+                <a href="index.html">
+                    <i class='bx bx-arrow-back'></i>
+                    Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Simple validation (dalam implementasi nyata, ini akan terhubung ke backend)
+            if (username === 'fidus' && password === 'family123') {
+                // Login berhasil - redirect ke main website
+                window.location.href = 'index.html';
+            } else {
+                // Login gagal - tampilkan error
+                errorMessage.style.display = 'block';
+                
+                // Shake animation
+                const loginBox = document.querySelector('.login-box');
+                loginBox.style.animation = 'shake 0.5s ease-in-out';
+                setTimeout(() => {
+                    loginBox.style.animation = '';
+                }, 500);
+            }
+        });
+        
+        // Hide error message saat user mulai mengetik
+        document.getElementById('username').addEventListener('input', function() {
+            document.getElementById('errorMessage').style.display = 'none';
+        });
+        
+        document.getElementById('password').addEventListener('input', function() {
+            document.getElementById('errorMessage').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
